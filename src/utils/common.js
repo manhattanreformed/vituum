@@ -141,7 +141,7 @@ export const processData = ({ paths, root = process.cwd() }, data = {}) => {
 
     const normalizePaths = Array.isArray(paths) ? paths.map(path => normalizePath(path)) : normalizePath(paths)
 
-    FastGlob.sync(normalizePaths).forEach(entry => {
+    FastGlob.sync(normalizePaths, {cwd: root}).forEach(entry => {
         const path = resolve(root, entry)
 
         context = lodash.merge(context, JSON.parse(fs.readFileSync(path).toString()))
